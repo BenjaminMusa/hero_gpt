@@ -1,0 +1,629 @@
+{% load tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gpt hero</title>
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% comment %} <link rel="stylesheet" href="../../static/main/gptprofile.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static "main/gptprofile.css" %}" type="text/css">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/hostmind/host@latest/static/index.css">
+    <title>{% block title %}{% endblock title %} - GPT Hero</title>
+     {% tailwind_css %}
+     <style>
+        @keyframes loader_5191 {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .square {
+            background: #ddd;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -5px;
+            margin-left: -5px;
+        }
+
+        #sq1 {
+            margin-top: -25px;
+            margin-left: -25px;
+            animation: loader_5191 675ms ease-in-out 0s infinite alternate;
+        }
+
+        #sq2 {
+            margin-top: -25px;
+            animation: loader_5191 675ms ease-in-out 75ms infinite alternate;
+        }
+
+        #sq3 {
+            margin-top: -25px;
+            margin-left: 15px;
+            animation: loader_5191 675ms ease-in-out 150ms infinite;
+        }
+
+        #sq4 {
+            margin-left: -25px;
+            animation: loader_5191 675ms ease-in-out 225ms infinite;
+        }
+
+        #sq5 {
+            animation: loader_5191 675ms ease-in-out 300ms infinite;
+        }
+
+        #sq6 {
+            margin-left: 15px;
+            animation: loader_5191 675ms ease-in-out 375ms infinite;
+        }
+
+        #sq7 {
+            margin-top: 15px;
+            margin-left: -25px;
+            animation: loader_5191 675ms ease-in-out 450ms infinite;
+        }
+
+        #sq8 {
+            margin-top: 15px;
+            animation: loader_5191 675ms ease-in-out 525ms infinite;
+        }
+
+        #sq9 {
+            margin-top: 15px;
+            margin-left: 15px;
+            animation: loader_5191 675ms ease-in-out 600ms infinite;
+        }
+
+
+        @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+        #container {
+            position: absolute;
+            margin: auto;
+            width: 100vw;
+            height: 80pt;
+            top: 0;
+            bottom: 0;
+
+            filter: url(#threshold) blur(0.6px);
+        }
+
+        #text1,
+        #text2 {
+            position: absolute;
+            width: 100%;
+            display: inline-block;
+
+            font-family: "Raleway", sans-serif;
+            font-size: 80pt;
+
+            text-align: center;
+
+            user-select: none;
+        }
+
+        /* color animation */
+        .animate-charcter {
+            text-transform: uppercase;
+            background-image: linear-gradient(-125deg,
+                    #231557 0%,
+                    #44107a 29%,
+                    #ff1361 67%,
+                    #fff800 100%);
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            font-size: 30px;
+        }
+
+        .animate-charcter1 {
+            background-image: linear-gradient(-125deg,
+                    #000000 0%,
+                    white 29%,
+                    #ee1361 67%,
+                    black 100%);
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            font-size: 30px;
+        }
+
+        .gradient-text-unlimited {
+            background-image: linear-gradient(to right, rgb(231, 210, 210), #da1b60);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes textclip {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .waviy {
+            position: relative;
+            -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, .2));
+            font-size: 60px;
+        }
+
+        .waviy span {
+            font-family: 'Alfa Slab One', cursive;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+            text-transform: uppercase;
+            animation: waviy 1s infinite;
+            animation-delay: calc(.1s * var(--i));
+
+        }
+
+        @keyframes waviy {
+
+            0%,
+            40%,
+            100% {
+                transform: translateY(0)
+            }
+
+            20% {
+                transform: translateY(-20px)
+            }
+        }
+
+        .header {
+            display: flex;
+            width: 50%;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .question-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 800px;
+        }
+
+        .question {
+            width: 90%;
+            height: 100px;
+            font-size: 50px;
+            color:white;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 100px;
+            border: 1px solid rgb(76, 76, 80);
+            border-radius: 10px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 300px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            height: 80%;
+            margin-left: 5%;
+            margin-right: 5%;
+
+        }
+
+        /*-------Typing Effect----------*/
+
+        .typing-text {
+            color: white
+        }
+
+        .font-50 {
+            font-size: 50px;
+            color: white;
+        }
+
+        .font-30 {
+            font-size: 30px;
+            color: white
+        }
+
+        /*-------Card----------------*/
+        .text-style1 {
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            padding-top: 40px;
+        }
+
+        .text-style2 {
+            font-size: 25px;
+            color: gray;
+        }
+        .pricing-card{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 1000px;
+            background-color: black;
+        }
+        .card {
+            width: 20%;
+            height: 750px;
+            margin-left: 2%;
+            margin-right: 2%;
+            background-image: linear-gradient(-225deg, 
+                    #231557 0%,
+                    #44107a 29%,
+                    #ff1361 67%,
+                    #fff800 100%);
+            border-radius: 20px;
+            transition: all .3s;
+        }
+
+        .card2 {
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            border-radius: 20px;
+            transition: all .2s;
+        }
+
+        .card2:hover {
+            transform: scale(0.98);
+            border-radius: 20px;
+        }
+
+        .card:hover {
+            box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+        }
+
+        .card_shadow {
+            width: 100%;
+            height: 120%;
+            border-radius: 30px;
+            background: #212121;
+        }
+
+
+        .input {
+            background-color: #212121;
+            max-width: 300px;
+            height: 40px;
+            padding: 10px;
+            /* text-align: center; */
+            border: 2px solid white;
+            border-radius: 5px;
+            /* box-shadow: 3px 3px 2px rgb(249, 255, 85); */
+        }
+
+        .input:focus {
+            color: white;
+            background-color: #212121;
+            outline-color: red;
+            box-shadow: -3px -3px 15px red;
+            transition: .1s;
+            transition-property: box-shadow;
+        }
+
+        /*-----Rephrase button-----*/
+
+        .btn-23,
+        .btn-23 *,
+        .btn-23 :after,
+        .btn-23 :before,
+        .btn-23:after,
+        .btn-23:before {
+        border: 0 solid;
+        box-sizing: border-box;
+        }
+
+        .btn-23 {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-appearance: button;
+        background-color: #000;
+        background-image: none;
+        color: #fff;
+        cursor: pointer;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        font-size: 100%;
+        font-weight: 900;
+        line-height: 1.5;
+        margin: 0;
+        -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+        padding: 0;
+        text-transform: uppercase;
+        }
+
+        .btn-23:disabled {
+        cursor: default;
+        }
+
+        .btn-23:-moz-focusring {
+        outline: auto;
+        }
+
+        .btn-23 svg {
+        display: block;
+        vertical-align: middle;
+        }
+
+        .btn-23 [hidden] {
+        display: none;
+        }
+
+        .btn-23 {
+        border-radius: 10px;
+        border-width: 2px;
+        overflow: hidden;
+        padding: 0.8rem 3rem;
+        position: relative;
+        }
+
+        .btn-23 span {
+        display: grid;
+        inset: 0;
+        place-items: center;
+        position: absolute;
+        transition: opacity 0.2s ease;
+        }
+
+        .btn-23 .marquee {
+        --spacing: 5em;
+        --start: 0em;
+        --end: 5em;
+        -webkit-animation: marquee 1s linear infinite;
+        animation: marquee 1s linear infinite;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+        opacity: 0;
+        position: relative;
+        text-shadow: #fff var(--spacing) 0, #fff calc(var(--spacing) * -1) 0,
+            #fff calc(var(--spacing) * -2) 0;
+        }
+
+        .btn-23:hover .marquee {
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+        opacity: 1;
+        }
+
+        .btn-23:hover .text {
+        opacity: 0;
+        }
+
+        @-webkit-keyframes marquee {
+        0% {
+            transform: translateX(var(--start));
+        }
+
+        to {
+            transform: translateX(var(--end));
+        }
+        }
+
+        @keyframes marquee {
+        0% {
+            transform: translateX(var(--start));
+        }
+
+        to {
+            transform: translateX(var(--end));
+        }
+        }
+
+        .line {
+            margin-left: 10px;
+            border-bottom: 2px solid white;
+            width: 82%; /* Adjust the height as needed */
+        }
+
+        /*---------profile essay------------*/
+        .essay
+        {
+            display: flex;
+            border:2px solid #495057;
+            border-radius:20px;
+            overflow-y: auto;
+            width:80%; 
+            height:100%; 
+            margin-bottom: 10px;
+        }
+
+        .partition1
+        {
+            position:relative;
+            width:50%;
+            height:450px;
+            border:2px solid;
+            border-color: black black black black;
+            overflow:hidden;
+        } 
+        .partition2
+        {
+            position:relative;
+            width:50%;
+            height:450px;
+            border:2px solid;
+            border-color: black black black #495057;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="w-[100vw] h-[10vh]">
+        <nav class="bg-black flex flex-row justify-center items-center w-[100vw] h-[10vh]">
+            <div class="w-[30%] ml-[10%]">
+                <img src="{% static "main/logo1.png" %}" alt="logo" height="60">         
+            </div>
+            <div class="header">
+                <a href="{% url 'home' %}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium mr-10"
+                    aria-current="page">Home</a>
+                <a href="{% url 'service' %}"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10">Service</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10">Profile</a>
+                <a href="{% url 'logout_redirect' %}"
+                    class="text-gray-300 bg-red-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10">Sign
+                    Out</a>
+                {% else %}
+                <a href="/accounts/login"
+                    class="text-red-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sign
+                    In</a>
+                <a href="/accounts/signup"
+                    class="text-gray-300 bg-red-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sign
+                    Up</a>
+                {% endif %}
+            </div>
+
+        </nav>
+    </div>
+    <div class="w-[100vw] h-[90vh] flex flex-col items-center mt-20">
+        <form action="{% url 'profile' %}" method="post" class="w-[70%]">
+        <div class="card_shadow flex flex-row">
+            <div class="w-[50%] ml-10 mt-10 flex flex-col justify-center mr-5">
+                <div class="h-[10%] ml-2">
+                    <label style="font-size: 24px;  color: white"><b>OpenAI API key</b></label>
+                </div>
+                <div class="h-[10%] flex flex-row ml-2">
+                    <input type="text" placeholder="Enter OpenAPI key" name="openai_api_key" style="border-radius: 10px; margin-top: 5px; width: 100%;">
+                </div>
+                <div class="h-[10%] ml-2" style="margin-top: 20px;">
+                    <label style="font-size: 24px; color: white"><b>ProWritingAid API key</b></label>
+                </div>
+                <div class="h-[10%] flex flex-row ml-2">
+                    <input type="text" placeholder="Enter ProWritingAid key" name="prowritingaid_api_key" style="border-radius: 10px; margin-top: 5px; width: 100%;">
+                </div>
+                <div class="h-[10%] ml-2" style="margin-top: 20px;">
+                    <button type="submit" class="bg-red-500 rounded-md text-xl text-white w-[100%] h-[100%]">Set</button>
+                </div>
+                <div class="h-[10%] flex flex-row ml-3" style="margin-top: 10px;">
+                    <label style="margin-top:10px; color:red;">Open API key set is:</label>
+                </div>
+                <div class="h-[20%] flex flex-row ml-3" style="margin-top: -10px;">
+                    <label id="openApiKey" style="margin-top:10px; color:white;">********************************</label>
+                </div>
+                <div class="h-[10%] flex flex-row ml-3" style="margin-top: -10px;">
+                    <label class="red-text" style="margin-top:10px;">ProWriting key set is:</label>
+                </div>
+                <div class="h-[10%] flex flex-row ml-3" style="margin-top: -10px;">
+                    <label id="proWritingApiKey" style="margin-top:10px; color: white;">********************************</label>
+                </div>
+                <div class="h-[10%] flex flex-row ml-3" style="margin-top: 10px;">
+                    <button class="bg-red-500 rounded-md text-xl text-white w-[100%]" id="toggleButton" type="button">Toggle API Keys</button>
+                </div>
+                <div class="h-[10%] flex flex-row ml-3" style="margin-top: 10px;">
+                    {% if not user_fields.subscribed %}
+                    <a href="{{stripe_url}}" style="background-color: #ff2200; border-radius: 10px; height: 50%;">Subscribe</a>
+                    {% else %}
+                    <a href="/cancel_sub/{{user_fields.subscription_id}}/" class="signupbtn" style="margin-right: 15px; width: 100%;">Cancel Subscription</a>
+                    {% endif %}
+                    <!-- {% if user.is_staff %} -->
+                    <a href="/admin" class="signupbtn">Open admin panel</a>
+                    <!-- {% endif %} -->
+                </div>
+                
+            </div>
+            <div class="essay">
+                <div class="partition1" style="height: 100%;overflow: scroll;">
+                    <label style="margin-left: 120px; margin-top:30px; color: white; font-size: 24px;">Original Essay</label>
+                    <ol>
+                    {% for essay in essays %}
+                        <li><p style="color: white;">{{essay.original_essay}}</p></li>
+                    {% endfor %}
+                    </ol>
+                 
+                </div>
+                <div class="partition2" style="height: 100%;overflow: scroll;">
+                    <label style="margin-left:100px; margin-top:30px; color: white; font-size: 24px;">Rephrased Essay</label>
+                    <ol>
+                    {% for essay in essays %}
+                        <li><p style="color: white;">{{essay.rephrased_essay}}</p></li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <script>
+        const openApiKeyElement = document.getElementById('openApiKey');
+        const proWritingApiKeyElement = document.getElementById('proWritingApiKey');
+        const toggleButton = document.getElementById('toggleButton');
+    
+        toggleButton.addEventListener('click', function() {
+            if (openApiKeyElement.textContent === '{{user_fields.openai_api_key}}') {
+                openApiKeyElement.textContent = '********************************';
+            } else {
+                openApiKeyElement.textContent = '{{user_fields.openai_api_key}}';
+            }
+    
+            if (proWritingApiKeyElement.textContent === '{{user_fields.prowritingaid_api_key}}') {
+                proWritingApiKeyElement.textContent = '********************************';
+            } else {
+                proWritingApiKeyElement.textContent = '{{user_fields.prowritingaid_api_key}}';
+            }
+        });
+    </script>
+</body>

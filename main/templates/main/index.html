@@ -1,0 +1,877 @@
+{% load tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/hostmind/host@latest/static/index.css">
+    <title>{% block title %}{% endblock title %} GPTHero</title>
+    {% tailwind_css %}
+    <style>
+
+
+    /*---------background effect---------*/
+    
+    .ball {
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0.7;
+}
+
+    /*---------text effect---------*/
+        @keyframes loader_5191 {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .square {
+            background: #ddd;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -5px;
+            margin-left: -5px;
+        }
+
+        #sq1 {
+            margin-top: -25px;
+            margin-left: -25px;
+            animation: loader_5191 675ms ease-in-out 0s infinite alternate;
+        }
+
+        #sq2 {
+            margin-top: -25px;
+            animation: loader_5191 675ms ease-in-out 75ms infinite alternate;
+        }
+
+        #sq3 {
+            margin-top: -25px;
+            margin-left: 15px;
+            animation: loader_5191 675ms ease-in-out 150ms infinite;
+        }
+
+        #sq4 {
+            margin-left: -25px;
+            animation: loader_5191 675ms ease-in-out 225ms infinite;
+        }
+
+        #sq5 {
+            animation: loader_5191 675ms ease-in-out 300ms infinite;
+        }
+
+        #sq6 {
+            margin-left: 15px;
+            animation: loader_5191 675ms ease-in-out 375ms infinite;
+        }
+
+        #sq7 {
+            margin-top: 15px;
+            margin-left: -25px;
+            animation: loader_5191 675ms ease-in-out 450ms infinite;
+        }
+
+        #sq8 {
+            margin-top: 15px;
+            animation: loader_5191 675ms ease-in-out 525ms infinite;
+        }
+
+        #sq9 {
+            margin-top: 15px;
+            margin-left: 15px;
+            animation: loader_5191 675ms ease-in-out 600ms infinite;
+        }
+
+
+        @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+        #container {
+            position: absolute;
+            margin: auto;
+            width: 100vw;
+            height: 80pt;
+            top: 0;
+            bottom: 0;
+
+            filter: url(#threshold) blur(0.6px);
+        }
+
+        #text1,
+        #text2 {
+            position: absolute;
+            width: 100%;
+            display: inline-block;
+
+            font-family: "Raleway", sans-serif;
+            font-size: 80pt;
+
+            text-align: center;
+
+            user-select: none;
+        }
+
+        /* color animation */
+        .animate-charcter {
+            text-transform: uppercase;
+            background-image: linear-gradient(-225deg,
+                    #000000 0%,
+                    white 29%,
+                    red 67%,
+                    black 100%);
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            font-size: 100px;
+        }
+
+        .gradient-text-unlimited {
+            background-image: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes textclip {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .waviy {
+            position: relative;
+            -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, .2));
+            font-size: 60px;
+        }
+
+        .waviy span {
+            font-family: 'Alfa Slab One', cursive;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+            text-transform: uppercase;
+            animation: waviy 1s infinite;
+            animation-delay: calc(.1s * var(--i));
+
+        }
+
+        @keyframes waviy {
+
+            0%,
+            40%,
+            100% {
+                transform: translateY(0)
+            }
+
+            20% {
+                transform: translateY(-20px)
+            }
+        }
+
+        .header {
+            display: flex;
+            width: 50%;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .question-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 800px;
+        }
+
+        .question {
+            width: 90%;
+            height: 100px;
+            font-size: 50px;
+            color:white;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 100px;
+            border: 1px solid rgb(76, 76, 80);
+            border-radius: 10px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 300px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            height: 80%;
+            margin-left: 5%;
+            margin-right: 5%;
+
+        }
+
+        /*-------Typing Effect----------*/
+
+        .typing-text {
+            color: white
+        }
+
+        .font-50 {
+            font-size: 50px;
+            color: white;
+        }
+
+        .font-30 {
+            font-size: 30px;
+            color: white
+        }
+
+        /*-------Card----------------*/
+        .text-style1 {
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            padding-top: 40px;
+        }
+
+        .text-style2 {
+            font-size: 25px;
+            color: gray;
+        }
+        .pricing-card{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+        }
+        .card {
+            width: 20%;
+            margin-left: 2%;
+            margin-right: 2%;
+            background-image: linear-gradient(-225deg, 
+                    #231557 0%,
+                    #ee2200 29%,
+                    #ff1361 67%,
+                    white 100%);
+            border-radius: 20px;
+            transition: all .3s;
+        }
+
+        .card2 {
+            width: 100%;
+            background-color: #1a1a1a;
+            border-radius: 20px;
+            transition: all .2s;
+        }
+
+        .card2:hover {
+            transform: scale(0.98);
+            border-radius: 20px;
+        }
+
+        .card:hover {
+            box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+        }
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: red;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: red;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+
+<body class="w-full h-[400vh]">
+
+    <div class="w-[100%] h-[85vh]">
+        <nav class="bg-black flex flex-row justify-center items-center w-[100%] h-[15vh]">
+            <div class="w-[30%] ml-[10%]">
+                <img src="{% static "main/logo1.png" %}" alt="logo" height="70">            
+            </div>
+            <div class="header">
+                <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium mr-10"
+                    aria-current="page" style="font-family:sans-serif; font-size: 20px;">Home</a>
+                <a href="#pricing"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10" style="font-family:sans-serif; font-size: 20px;">Pricing</a>
+                
+                <a href="#contact"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10" style="font-family:sans-serif; font-size: 20px;">Contact</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'service' %}"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10" style="font-family:sans-serif; font-size: 20px;">Service</a>
+                <a href="{% url 'profile' %}"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10" style="font-family:sans-serif; font-size: 20px;">Profile</a>
+                <a href="{% url 'logout_redirect' %}"
+                    class="text-gray-300 bg-red-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium mr-10" style="font-family:sans-serif; font-size: 20px;">Sign
+                    Out</a>
+                {% else %}
+                <a href="/accounts/login"
+                    class="text-red-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" style="font-family:sans-serif; font-size: 20px;">Sign
+                    In</a>
+                <a href="/accounts/signup"
+                    class="text-gray-300 bg-red-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" style="font-family:sans-serif; font-size: 20px;">Sign
+                    Up</a>
+                {% endif %}
+            </div>
+
+        </nav>
+
+        <div class="bg-black h-[60vh] flex flex-col">
+            <div class="h-[70vh] flex flex-col items-center">
+                <label style="font-family:sans-serif; font-size: 70px; font-weight: 800; margin-top: 200px; color:white;"> Empower Your Writing</label>
+                <div class="flex flex-row">
+                    <label style="font-family:sans-serif; font-size: 70px; font-weight: 800; margin-top: 20px; color:red;"> AI-Proof</label>&nbsp; &nbsp;
+                    <label style="font-family:sans-serif; font-size: 70px; font-weight: 800; margin-top: 20px; color:white;">Content Writing Platform</label>
+                </div>
+                <div id="text1" style="color: white; font-size: 20px; font-weight: 800; font-family:sans-serif; margin-top: 650px;">
+                    GPTHero is at the forefront of innovative technology, ensuring your content remains unique and undetectable by AI detection tools.
+                </div>
+                <div id="text2" style="color: white; font-size: 20px; font-weight: 800; font-family:sans-serif; margin-top: 700px;">
+                    Our platform offers the perfect blend of creativity and intelligence, allowing for seamless rephrasing and enhancement of your writing.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[100%] h-[50vh] flex flex-col justify-center items-center mt-20">
+        <div class="flex flex-row" id="pricing"> 
+            <span class="gradient-text-unlimited" style="font-family:sans-serif; font-weight: 700; color: white; font-size: 60px;">Unlock</span>&nbsp;&nbsp;&nbsp;
+            <span class="gradient-text-unlimited" style="font-family:sans-serif; font-weight: 700; font-size: 60px;">Unlimited</span>&nbsp;&nbsp;&nbsp;
+            <span class="gradient-text-unlimited" style="font-family:sans-serif; font-weight: 700; color: red; font-size: 60px;">GPT</span> 
+            <span class="gradient-text-unlimited" style="font-family:sans-serif; font-weight: 700; color: white; font-size: 60px;">Hero</span>
+        </div>
+        <div class="flex flex-row justify-center items-center mt-10">
+            <label class="text-white" style="font-size: 30px; font-family:sans-serif;">Monthly</label>&nbsp; 
+            <label class="switch">
+                <input type="checkbox" id="Checkbox" onchange="updatelabel()">
+                <span class="slider"></span>
+            </label>
+            
+            <label class="text-white" style="font-size: 30px; font-family:sans-serif;">Yearly</label>
+        </div>
+    </div>
+    <div class="w-[80%] flex flex-row justify-center" style="margin-top: -7%;">
+        <div class="pricing-card">
+            <div class="card">
+                <div class="card2 flex flex-col items-center" style="padding-bottom: 10px; font-family:sans-serif;">
+                    <label style="color: white; font-size: 24px; margin-top: 20px; font-family:sans-serif;">Basic</label>
+                    <div class="flex flex-row text-style1" style="font-family:sans-serif;">
+                        <p>$</p><label id="price_basic">5</label><label id="sel_time1">/Month</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 50px;">Bypasses GPTZero, TurnItIn</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Context up to 2021</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Custom Rephrasing Settings</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100MB File Uploads + OCR</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Rephrase long texts</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100,000 words with</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">standard rephraser</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">API Access</label>
+                    </div>
+                    <button style="width: 90%; height: 40px; color: white; background-color: red; border-radius: 10px; margin-top: 60px;">Buy</button>
+                </div>
+            </div>
+    
+            <div class="card">
+                <div class="card2 flex flex-col items-center" style="padding-bottom: 10px; font-family:sans-serif;">
+                    <label style="color: white; font-size: 24px; margin-top: 20px; font-family:sans-serif;">Standard</label>
+                    <div class="flex flex-row text-style1">
+                        <p>$</p><label id="price_standard">15</label><label id="sel_time2">/Month</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 50px;">Bypasses GPTZero, TurnItIn</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Context up to 2021</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Custom Rephrasing Settings</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100MB File Uploads + OCR</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Rephrase long texts</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100,000 words with</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">standard rephraser</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">API Access</label>
+                    </div>
+                    <button style="width: 90%; height: 40px; color: white; background-color: red; border-radius: 10px; margin-top: 60px;">Buy</button>
+                </div>
+            </div>
+    
+            <div class="card">
+                <div class="card2 flex flex-col items-center" style="padding-bottom: 10px; font-family:sans-serif;">
+                    <label style="color: white; font-size: 24px; margin-top: 20px; font-family:sans-serif;">Pro</label>
+                    <div class="flex flex-row text-style1">
+                        <p>$</p><label id="price_pro">30</label><label id="sel_time3">/Month</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 50px;">Bypasses GPTZero, TurnItIn</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Context up to 2021</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Custom Rephrasing Settings</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100MB File Uploads + OCR</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Rephrase long texts</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100,000 words with</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">standard rephraser</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">API Access</label>
+                    </div>
+                    <button style="width: 90%; height: 40px; color: white; background-color: red; border-radius: 10px; margin-top: 60px;">Buy</button>
+                </div>
+            </div>  
+    
+            <div class="card">
+                <div class="card2 flex flex-col items-center" style="padding-bottom: 10px; font-family:sans-serif;">
+                    <label style="color: white; font-size: 24px; margin-top: 20px; font-family:sans-serif;">Enterprise</label>
+                    <div class="flex flex-row text-style1">
+                        <label>Contact Us</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 50px;">Bypasses GPTZero, TurnItIn</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Context up to 2021</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Custom Rephrasing Settings</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100MB File Uploads + OCR</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">Rephrase long texts</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">100,000 words with</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">standard rephraser</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <label style="color: white; font-size: 20px; margin-top: 10px;">API Access</label>
+                    </div>
+                    <button style="width: 90%; height: 40px; color: white; background-color: red; border-radius: 10px; margin-top: 60px;">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="contact" class="mt-20" style="font-family:sans-serif;">
+        <div class="w-[100%] h-[70vh] rounded-lg">
+            <div class="w-[100%] h-[50%] flex flex-col justify-center items-center mt-20">
+                <div class="flex flex-row justify-center w-[80%] mt-20">
+                    <label class="text-white text-4xl">Contact Us</label> 
+                </div>
+                
+                <div class="w-[360px] w-full bg-[#202020] rounded-lg shadow-md p-4 mt-20">
+                    <!-- <div class="w-[100%] bg-[#202020]"> -->
+                    <form action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                      <div class="mb-4">
+                        <label class="block mb-2 text-gray-50" for="name"> Name </label>
+                        <input
+                          placeholder="Your Name"
+                          class="w-full p-2 border-b-2 border-red-400 bg-transparent outline-none focus:border-b-2 focus:border-red-600"
+                          name="name"
+                          id="name"
+                          type="text"
+                          style="color: white"
+                        />
+                      </div>
+                      <div class="mb-4">
+                        <label class="block mb-2 text-gray-50" for="email"> Email </label>
+                        <input
+                          placeholder="Your Email"
+                          class="w-full p-2 border-b-2 border-red-400 bg-transparent outline-none focus:border-b-2 focus:border-red-600"
+                          name="email"
+                          id="email"
+                          type="email"
+                          style="color: white"
+                        />
+                      </div>
+                      <div class="mb-4">
+                        <label class="block mb-2 text-gray-50" for="message"> Message </label>
+                        <textarea
+                          placeholder="Your Message"
+                          class="w-full p-2 border-red-400 bg-transparent outline-none focus:border-red-600"
+                          rows="4"
+                          name="message"
+                          id="message"
+                          style="color: white"
+                        ></textarea>
+                      </div>
+                      <div class="mb-4">
+                        <button
+                          class="w-full bg-white text-gray-700 font-semibold p-2 rounded transition-all hover:bg-red-500"
+                          type="submit"
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+    <footer style="position: relative; margin-top: 0px; font-family:sans-serif;">
+        <div style="text-align: center;">
+            <p style="color: aliceblue;">&copy; 2024 GPTHero. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+<script>
+//background effect1
+// var sentences1 = ["GPTHero is at the forefront of innovative technology, ensuring your content remains unique and undetectable by AI detection tools"];
+// var sentences2 = ["Our platform offers the perfect blend of creativity and intelligence, allowing for seamless rephrasing and enhancement of your writing."];
+//                  var sentenceIndex = 0;
+//     var text = sentences[sentenceIndex];
+//     var index = 0;
+//     var direction = 1; // 1 for appearing, -1 for disappearing
+
+//     function animateText() {
+//         if (index >= text.length) {
+//             direction = -1; // Start disappearing
+//         }
+
+//         if (index <= 0 && direction === -1) {
+//             direction = 1; // Start appearing
+//             sentenceIndex = (sentenceIndex + 1) % sentences.length;
+//             text = sentences[sentenceIndex];
+//         }
+
+//         var newText = text.substring(0, index);
+//         document.getElementById('text').textContent = newText;
+
+//         index += direction;
+//         setTimeout(animateText, 100); // Adjust the speed here (in milliseconds)
+//     }
+
+//     animateText();
+    // var sentenceIndex = 0;
+    // var text1 = sentences1[sentenceIndex];
+    // var text2 = sentences2[sentenceIndex];
+    // var index = 0;
+    // var direction = 1; // 1 for appearing, -1 for disappearing
+
+    // function animateText1() {
+    //     if (index >= text1.length) {
+            
+    //         // direction = -1; // Start disappearing
+    //     }
+
+    //     if (index <= 0 && direction === -1) {
+    //         direction = 0; // Stop animation
+    //         setTimeout(function() {
+    //             direction = 1; // Start appearing for the next sentence
+    //             sentenceIndex = (sentenceIndex + 1) % sentences1.length;
+    //             text1 = sentences1[sentenceIndex];
+    //             setTimeout(function() {
+    //                 direction = -1; // Start disappearing for the next sentence
+    //                 index = 0; // Reset index
+    //                 animateText1(); // Start the animation for the next sentence
+    //             }, 20000); // Display for 20 seconds
+    //         }, 1000); // Delay before displaying the next sentence
+    //     }
+
+    //     var newText = text1.substring(0, index);
+    //     document.getElementById('text1').textContent = newText;
+
+    //     index += direction;
+    //     setTimeout(animateText1, 100); // Adjust the speed here (in milliseconds)
+    // }
+
+    // function animateText2() {
+    //     if (index >= text2.length) {
+            
+    //         // direction = -1; // Start disappearing
+    //     }
+
+    //     if (index <= 0 && direction === -1) {
+    //         direction = 0; // Stop animation
+    //         setTimeout(function() {
+    //             direction = 1; // Start appearing for the next sentence
+    //             sentenceIndex = (sentenceIndex + 1) % sentences2.length;
+    //             text2 = sentences2[sentenceIndex];
+    //             setTimeout(function() {
+    //                 direction = -1; // Start disappearing for the next sentence
+    //                 index = 0; // Reset index
+    //                 animateText2(); // Start the animation for the next sentence
+    //             }, 20000); // Display for 20 seconds
+    //         }, 1000); // Delay before displaying the next sentence
+    //     }
+
+    //     var newText = text2.substring(0, index);
+    //     document.getElementById('text2').textContent = newText;
+
+    //     index += direction;
+    //     setTimeout(animateText2, 100); // Adjust the speed here (in milliseconds)
+    // }
+    // animateText1();
+    // animateText2();
+    // Some random colors
+const colors = ["red", "white"];
+
+const numBalls = 50;
+const balls = [];
+
+for (let i = 0; i < numBalls; i++) {
+  let ball = document.createElement("div");
+  ball.classList.add("ball");
+  ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+  ball.style.left = `${Math.floor(Math.random() * 95)}%`;
+  ball.style.top = `${Math.floor(Math.random() * 100)}%`;
+  ball.style.transform = `scale(${Math.random()})`;
+  ball.style.width = `${Math.random()}em`;
+  ball.style.height = ball.style.width;
+  
+  balls.push(ball);
+  document.body.append(ball);
+}
+
+// Keyframes
+balls.forEach((el, i, ra) => {
+  let to = {
+    x: Math.random() * (i % 2 === 0 ? -11 : 11),
+    y: Math.random() * 12
+  };
+
+  let anim = el.animate(
+    [
+      { transform: "translate(0, 0)" },
+      { transform: `translate(${to.x}rem, ${to.y}rem)` }
+    ],
+    {
+      duration: (Math.random() + 1) * 2000, // random duration
+      direction: "alternate",
+      fill: "both",
+      iterations: Infinity,
+      easing: "ease-in-out"
+    }
+  );
+});
+    
+    if (typeof window.CSS.registerProperty === 'function') {
+        console.log('CSS.registerProperty supported 🎉')
+        document.body.style.setProperty('--supported', 1);
+        document.body.classList.add('registerProperty-supported')
+    } else {
+        console.log('CSS.registerProperty not supported ❌')
+        document.body.style.setProperty('--not-supported', 1);
+        document.body.classList.add('registerProperty-not-supported')
+    }
+
+    function moveToService() {
+        window.location.href = '/service';
+    }
+
+
+    var words = ['Hi i like HTML', 'I also like css', 'Lorem ipsum dolor sit amet', ' consectetur adipiscing elit', 'sed do eiusmod tempor incididunt'],
+        part,
+        i = 0,
+        offset = 0,
+        len = words.length,
+        forwards = true,
+        skip_count = 0,
+        skip_delay = 15,
+        speed = 70;
+    var wordflick = function () {
+        setInterval(function () {
+            if (forwards) {
+                if (offset >= words[i].length) {
+                    ++skip_count;
+                    if (skip_count == skip_delay) {
+                        forwards = false;
+                        skip_count = 0;
+                    }
+                }
+            }
+            else {
+                if (offset == 0) {
+                    forwards = true;
+                    i++;
+                    offset = 0;
+                    if (i >= len) {
+                        i = 0;
+                    }
+                }
+            }
+            part = words[i].substr(0, offset);
+            if (skip_count == 0) {
+                if (forwards) {
+                    offset++;
+                }
+                else {
+                    offset--;
+                }
+            }
+            $('.word').text(part);
+        }, speed);
+    };
+
+    $(document).ready(function () {
+        wordflick();
+    });
+
+    function updatelabel() {
+        let checkbox = document.getElementById('Checkbox');
+        let price_basic = document.getElementById('price_basic');
+        let price_standard = document.getElementById('price_standard');
+        let price_pro = document.getElementById('price_pro');
+        let sel_time1 = document.getElementById('sel_time1');
+        let sel_time2 = document.getElementById('sel_time2');
+        let sel_time3 = document.getElementById('sel_time3');
+        price_basic_num = parseInt(price_basic.textContent, 10);
+        price_standard_num = parseInt(price_standard.textContent, 10);        
+        price_pro_num = parseInt(price_pro.textContent, 10);
+        
+        if (checkbox.checked) {
+            price_basic.innerText = price_basic_num * 10;
+            price_standard.innerText = price_standard_num * 10;
+            price_pro.innerText = price_pro_num * 10;
+            sel_time1.textContent = '/Year';
+            sel_time2.textContent = '/Year';
+            sel_time3.textContent = '/Year';
+        } else {
+            price_basic.innerText = price_basic_num / 10;
+            price_standard.innerText = price_standard_num / 10;
+            price_pro.innerText = price_pro_num / 10;
+            sel_time1.textContent = '/Month';
+            sel_time2.textContent = '/Month';
+            sel_time3.textContent = '/Month';
+        }
+    }
+
+    
+
+</script>
+
+</html>

@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gpt hero</title>
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% comment %} <link rel="stylesheet" href="../../static/main/gptprofile.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static "main/gptprofile.css" %}" type="text/css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 0.5em;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <div class="navbar-pos">
+    <nav class="fix navbar navbar-expand-lg navbar-dark bg-black sticky">
+        <a class="navbar-brand" href="#">
+            <img src="{% static "main/logo1.png" %}" alt="logo" height="60">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks" aria-controls="navbarLinks" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarLinks">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://localhost:8000/#pricing-plans">Pricing</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                <!-- <form action="{% url 'logout_redirect' %}"> -->
+                    <a class="signupbtn" style="width:70px;" href="{% url 'logout_redirect' %}">logout</a>
+                    <!-- <a class="signupbtn" style="width:70px;" href="http://localhost:8000/accounts/logout">logout</a> -->
+                    <!-- <button type="submit" class="signupbtn" style="width:70px;">logout</button> -->
+                <!-- </form> -->
+            </ul>
+        </div>
+    </nav>
+    </div>
+
+    <div class ="head-body">
+        <div class="main-head">     
+        <h1 class="head-size"><span class="red-text">Welcome</span>, {{user}}</h1>
+        </div>
+        <div class="box">
+          <div class="container">
+            <form action="{% url 'profile' %}" method="post" class="signup-form">
+                {% csrf_token %}
+                <label for="openapi" class="form-label"><b>OpenAI API key</b></label>
+                <input type="text" placeholder="Enter OpenAPI key" name="openai_api_key" class="input-box">
+                <label for="prowrite" class="form-label"><b>ProWritingAid API key</b></label>
+                <input type="text" placeholder="Enter ProWritingAid key" name="prowritingaid_api_key" class="input-box">
+                 <button type="submit" class="signupbtn">Set</button>   
+                 <div>
+                    <h5 class="red-text" style="margin-top:10px;">Open API key set is:</h5>
+                    <h5 id="openApiKey" style="margin-top:10px;">********************************</h5>
+                    <h5 class="red-text" style="margin-top:10px;">ProWriting key set is:</h5>
+                    <h5 id="proWritingApiKey" style="margin-top:10px;">********************************</h5>
+                </div>
+                <button id="toggleButton" type="button" class="signupbtn">Toggle API Keys</button>
+                <div class="d-flex">
+                    {% if not user_fields.subscribed %}
+                    <a href="{{stripe_url}}" class="signupbtn" style="margin-right: 15px;">Subscribe</a>
+                    {% else %}
+                    <a href="/cancel_sub/{{user_fields.subscription_id}}/" class="signupbtn" style="margin-right: 15px;">Cancel Subscription</a>
+                    {% endif %}
+                    <!-- {% if user.is_staff %} -->
+                    <a href="/admin" class="signupbtn">Open admin panel</a>
+                    <!-- {% endif %} -->
+                </div>
+            </form>
+            <div class="essay" style="width: 95%;">
+                    <div class="partition1" style="height: 100%;overflow: scroll;">
+                    <h3 style="margin-left:30px; margin-top:30px">Original Essay</h3>
+                    <ol>
+                    {% for essay in essays %}
+                        <li><p>{{essay.original_essay}}</p></li>
+                    {% endfor %}
+                    </ol>
+                 
+                    </div>
+                    <div class="partition2" style="height: 100%;overflow: scroll;">
+                    <h3 style="margin-left:30px; margin-top:30px">Rephrased Essay</h3>
+                    <ol>
+                    {% for essay in essays %}
+                        <li><p>{{essay.rephrased_essay}}</p></li>
+                    {% endfor %}
+                    </ol>
+                    </div>
+            </div>
+          </div> 
+        </div> 
+    </div>
+    <script>
+        const openApiKeyElement = document.getElementById('openApiKey');
+        const proWritingApiKeyElement = document.getElementById('proWritingApiKey');
+        const toggleButton = document.getElementById('toggleButton');
+    
+        toggleButton.addEventListener('click', function() {
+            if (openApiKeyElement.textContent === '{{user_fields.openai_api_key}}') {
+                openApiKeyElement.textContent = '********************************';
+            } else {
+                openApiKeyElement.textContent = '{{user_fields.openai_api_key}}';
+            }
+    
+            if (proWritingApiKeyElement.textContent === '{{user_fields.prowritingaid_api_key}}') {
+                proWritingApiKeyElement.textContent = '********************************';
+            } else {
+                proWritingApiKeyElement.textContent = '{{user_fields.prowritingaid_api_key}}';
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {%  endblock %}
+</body>
+</html>
